@@ -1,0 +1,37 @@
+# 模型融合系统依赖包
+# Model Merging System Requirements
+
+# 核心依赖
+torch>=2.0.0                    # PyTorch深度学习框架
+transformers>=4.35.0            # HuggingFace模型库
+cma>=3.3.0                      # CMA-ES优化算法
+openai>=1.0.0                   # OpenAI-compatible judge API client
+safetensors>=0.4.0              # Large-model state_dict streaming/cache support
+
+# 数据处理
+numpy>=1.24.0                   # 数值计算
+pyyaml>=6.0                     # YAML配置文件解析
+
+# 可视化（可选）
+matplotlib>=3.7.0               # 绘图库
+
+# 推荐的额外依赖
+accelerate>=0.24.0              # 模型加载加速
+sentencepiece>=0.1.99           # 某些模型的分词器
+protobuf>=3.20.0                # Protocol Buffers
+
+# GPU加速（可选，根据CUDA版本选择）
+# torch==2.0.0+cu118            # CUDA 11.8
+# torch==2.0.0+cu121            # CUDA 12.1
+
+# 注意事项:
+# 1. torch版本应与CUDA版本匹配
+# 2. 如果使用CPU运行，标准版torch即可
+# 3. transformers版本建议>=4.35以支持最新模型
+# 4. 如需使用特定模型，可能需要额外依赖，请参考模型文档
+
+# 安装方法:
+# pip install -r requirements.txt
+
+# 验证安装:
+# python -c "import torch; import transformers; import cma; print('✓ All dependencies installed')"
