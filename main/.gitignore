@@ -1,0 +1,38 @@
+# Python cache/build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local experiment artifacts
+experiments/
+
+# Paper temp/intermediate outputs
+paper/~$*.docx
+paper/*.tmp
+paper/*.log
+paper/*.aux
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+paper/*.fdb_latexmk
+paper/*.fls
+paper/paper.docx
+paper/paper_fixed.docx
+paper/paper_final.docx
+
+# Local reference file (not source)
+融合模型.pdf
