@@ -1,0 +1,201 @@
+best_score: 0.7787798200928105
+config:
+  dialogue_weight: 0.4
+  early_stop_min_delta: 0.003
+  early_stop_patience: 3
+  enable_early_stop: true
+  merge_method: slerp
+  safety_weight: 0.6
+  stage1_generations: 3
+  stage1_popsize: 6
+  stage1_sigma: 0.15
+  stage2_generations: 3
+  stage2_popsize: 6
+  stage2_sigma: 0.09
+  stage3_generations: 3
+  stage3_popsize: 6
+  stage3_sigma: 0.04
+  use_dare: false
+  use_dora: false
+  use_two_stage_cma: true
+end_time: '2026-04-25T00:35:21.650411'
+experiment_name: LLaMA3-8B Evolutionary Merge 2
+model_a: /root/autodl-tmp/llama3_8b/it
+model_b: /root/autodl-tmp/llama3_8b/base
+optimization_history:
+  best_param_coeffs:
+  - &id003
+    - 0.5659507845991958
+    - 0.4340492154008042
+  - &id004
+    - 0.5026947963260822
+    - 0.4973052036739178
+  - &id001
+    - 0.5083929234024871
+    - 0.4916070765975129
+  - &id007
+    - 0.4632218482468091
+    - 0.5367781517531909
+  - &id008
+    - 0.4495515286146041
+    - 0.5504484713853959
+  - &id009
+    - 0.3589283280066674
+    - 0.6410716719933326
+  - &id013
+    - 0.4623496472024675
+    - 0.5376503527975325
+  - &id014
+    - 0.4605764967882693
+    - 0.5394235032117307
+  - &id015
+    - 0.4594151613788836
+    - 0.5405848386211164
+  best_scores:
+  - 0.7740160381381205
+  - 0.7782205942480857
+  - 0.7787798200928105
+  - 0.773054415227961
+  - 0.7711938606534304
+  - 0.7720657273052145
+  - 0.7657397761645736
+  - 0.7729492260460301
+  - 0.7717294624331734
+  best_solutions:
+  - &id005
+    - -0.26534919420541053
+  - &id006
+    - -0.010779289676360687
+  - &id002
+    - -0.03357484724864896
+  - &id010
+    - 0.14737879071282814
+  - &id011
+    - 0.2024828657387242
+  - &id012
+    - 0.5800185383307884
+  - &id016
+    - 0.15088703005029708
+  - &id017
+    - 0.1580220239332863
+  - &id018
+    - 0.16269729570656957
+  generation_best_index:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 0
+  - 0
+  - 5
+  - 1
+  - 0
+  generations:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  global_best_param_coeffs: *id001
+  global_best_score: 0.7787798200928105
+  global_best_solution: *id002
+  mean_scores:
+  - 0.748370826144631
+  - 0.7559236325789019
+  - 0.7612396843489905
+  - 0.7559802065469818
+  - 0.7585962065334031
+  - 0.7480500901522081
+  - 0.7506978874939799
+  - 0.7611049259837586
+  - 0.7649023874381417
+  stages:
+  - best_param_coeffs:
+    - *id003
+    - *id004
+    - *id001
+    best_score_so_far: 0.7782205942480857
+    best_scores:
+    - 0.7740160381381205
+    - 0.7782205942480857
+    - 0.7787798200928105
+    best_solutions:
+    - *id005
+    - *id006
+    - *id002
+    early_stop_generation: null
+    early_stopped: false
+    generation_best_index:
+    - 1
+    - 2
+    - 3
+    generations:
+    - 1
+    - 2
+    - 3
+    mean_scores:
+    - 0.748370826144631
+    - 0.7559236325789019
+    - 0.7612396843489905
+    stage_name: stage1_coarse
+  - best_param_coeffs:
+    - *id007
+    - *id008
+    - *id009
+    best_score_so_far: 0.773054415227961
+    best_scores:
+    - 0.773054415227961
+    - 0.7711938606534304
+    - 0.7720657273052145
+    best_solutions:
+    - *id010
+    - *id011
+    - *id012
+    early_stop_generation: null
+    early_stopped: false
+    generation_best_index:
+    - 4
+    - 0
+    - 0
+    generations:
+    - 1
+    - 2
+    - 3
+    mean_scores:
+    - 0.7559802065469818
+    - 0.7585962065334031
+    - 0.7480500901522081
+    stage_name: stage2_medium
+  - best_param_coeffs:
+    - *id013
+    - *id014
+    - *id015
+    best_score_so_far: 0.7729492260460301
+    best_scores:
+    - 0.7657397761645736
+    - 0.7729492260460301
+    - 0.7717294624331734
+    best_solutions:
+    - *id016
+    - *id017
+    - *id018
+    early_stop_generation: null
+    early_stopped: false
+    generation_best_index:
+    - 5
+    - 1
+    - 0
+    generations:
+    - 1
+    - 2
+    - 3
+    mean_scores:
+    - 0.7506978874939799
+    - 0.7611049259837586
+    - 0.7649023874381417
+    stage_name: stage3_fine
+start_time: '2026-04-24T21:04:42.833768'

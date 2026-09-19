@@ -1,0 +1,1081 @@
+nohup: ignoring input
+
+======================================================================
+  Universal Evolutionary Model Merge
+======================================================================
+  实验名称 : LLaMA3-3B Evolutionary Merge
+  Model A  : /root/autodl-tmp/llama3_3b/it
+  Model B  : /root/autodl-tmp/llama3_3b/base
+  输出目录 : /root/autodl-tmp/experiments/llama3_3b
+  开始时间 : 2026-04-22T12:08:54.287118
+======================================================================
+
+[1/5] 硬件检查
+  GPU  : NVIDIA H800 PCIe
+  VRAM : 79.2 GB
+
+[2/5] 架构兼容性校验
+  Model A 架构: llama  (/root/autodl-tmp/llama3_3b/it)
+  Model B 架构: llama  (/root/autodl-tmp/llama3_3b/base)
+[OK] 架构一致: llama
+
+[3/5] 加载模型
+  merge_method   = slerp
+  use_dora       = False
+  use_dare       = False
+  popsize        = 10
+  generations    = 12
+  low_vram       = True
+  large_model    = never (threshold 4.0B)
+  merge_device   = gpu_full
+
+加载 2 个源模型...
+[OK] 已加载: /root/autodl-tmp/llama3_3b/it
+[OK] 已加载: /root/autodl-tmp/llama3_3b/base
+[OK] 检测到 transformer 层数: 28
+
+[4/5] CMA-ES 进化优化
+
+============================================================
+开始进化优化...
+============================================================
+  源模型数: 2
+  搜索模式: 全局统一 (global)
+  参数空间: SLERP 权重 x2
+  数据流路由: 关闭
+  总搜索维度: 2
+  对话质量门槛: 0.35
+  PPL 门槛: 150.0 (超过视为模型损坏)
+  种群大小: 10, 最大代数: 12
+(5_w,10)-aCMA-ES (mu_w=3.2,w_1=45%) in dimension 2 (seed=866187, Wed Apr 22 12:08:58 2026)
+
+--- 第 1 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.238, 对话: 0.615, PPL: 4.5(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.313, 对话: 0.742, PPL: 3.9(得分1.00), 总分: 0.709×1.00=0.709
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.242, 对话: 0.603, PPL: 4.5(得分1.00), 总分: 0.696×1.00=0.696
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.256, 对话: 0.660, PPL: 3.9(得分1.00), 总分: 0.711×1.00=0.711
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.208, 对话: 0.657, PPL: 4.0(得分1.00), 总分: 0.738×1.00=0.738
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.327, 对话: 0.724, PPL: 3.8(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.183, 对话: 0.620, PPL: 4.3(得分1.00), 总分: 0.738×1.00=0.738
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.652, PPL: 3.9(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.329, 对话: 0.661, PPL: 3.8(得分1.00), 总分: 0.667×1.00=0.667
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.263, 对话: 0.654, PPL: 3.9(得分1.00), 总分: 0.704×1.00=0.704
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.180, 对话: 0.539, PPL: 4.3(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.202, 对话: 0.624, PPL: 4.0(得分1.00), 总分: 0.728×1.00=0.728
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.152, 对话: 0.619, PPL: 3.9(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7563, 平均分数: 0.7056
+本代最优融合比例: [0.5119916813492726, 0.48800831865072747]
+
+--- 第 2 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.228, 对话: 0.578, PPL: 5.0(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.661, PPL: 3.8(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.292, 对话: 0.652, PPL: 3.9(得分1.00), 总分: 0.685×1.00=0.685
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.263, 对话: 0.641, PPL: 3.9(得分1.00), 总分: 0.699×1.00=0.699
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.321, 对话: 0.730, PPL: 3.9(得分1.00), 总分: 0.699×1.00=0.699
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.256, 对话: 0.661, PPL: 3.8(得分1.00), 总分: 0.711×1.00=0.711
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.356, 对话: 0.737, PPL: 3.8(得分1.00), 总分: 0.681×1.00=0.681
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.306, 对话: 0.725, PPL: 3.8(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.230, 对话: 0.674, PPL: 4.0(得分1.00), 总分: 0.731×1.00=0.731
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.246, 对话: 0.663, PPL: 3.9(得分1.00), 总分: 0.717×1.00=0.717
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.206, 对话: 0.636, PPL: 4.0(得分1.00), 总分: 0.731×1.00=0.731
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.189, 对话: 0.640, PPL: 3.9(得分1.00), 总分: 0.743×1.00=0.743
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.189, 对话: 0.625, PPL: 3.8(得分1.00), 总分: 0.737×1.00=0.737
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7426, 平均分数: 0.7069
+本代最优融合比例: [0.47454836768714576, 0.5254516323128542]
+
+--- 第 3 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.266, 对话: 0.584, PPL: 4.4(得分1.00), 总分: 0.674×1.00=0.674
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.240, 对话: 0.662, PPL: 3.9(得分1.00), 总分: 0.720×1.00=0.720
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.327, 对话: 0.688, PPL: 3.8(得分1.00), 总分: 0.679×1.00=0.679
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.318, 对话: 0.731, PPL: 3.8(得分1.00), 总分: 0.701×1.00=0.701
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.224, 对话: 0.658, PPL: 3.9(得分1.00), 总分: 0.729×1.00=0.729
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.327, 对话: 0.726, PPL: 3.8(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.289, 对话: 0.755, PPL: 4.0(得分1.00), 总分: 0.728×1.00=0.728
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.638, PPL: 4.0(得分1.00), 总分: 0.712×1.00=0.712
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.256, 对话: 0.660, PPL: 3.9(得分1.00), 总分: 0.711×1.00=0.711
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.274, 对话: 0.639, PPL: 3.9(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.179, 对话: 0.641, PPL: 3.9(得分1.00), 总分: 0.749×1.00=0.749
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.342, 对话: 0.719, PPL: 4.0(得分1.00), 总分: 0.683×1.00=0.683
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.212, 对话: 0.626, PPL: 3.9(得分1.00), 总分: 0.723×1.00=0.723
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7493, 平均分数: 0.7017
+本代最优融合比例: [0.451368530907712, 0.5486314690922881]
+
+--- 第 4 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.268, 对话: 0.628, PPL: 4.2(得分1.00), 总分: 0.690×1.00=0.690
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.205, 对话: 0.604, PPL: 4.4(得分1.00), 总分: 0.719×1.00=0.719
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.247, 对话: 0.621, PPL: 4.1(得分1.00), 总分: 0.700×1.00=0.700
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.593, PPL: 4.0(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.279, 对话: 0.651, PPL: 4.1(得分1.00), 总分: 0.693×1.00=0.693
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.651, PPL: 3.8(得分1.00), 总分: 0.690×1.00=0.690
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.230, 对话: 0.611, PPL: 4.3(得分1.00), 总分: 0.706×1.00=0.706
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.262, 对话: 0.657, PPL: 3.9(得分1.00), 总分: 0.705×1.00=0.705
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.318, 对话: 0.731, PPL: 3.8(得分1.00), 总分: 0.701×1.00=0.701
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.247, 对话: 0.636, PPL: 4.1(得分1.00), 总分: 0.706×1.00=0.706
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.174, 对话: 0.541, PPL: 4.4(得分1.00), 总分: 0.712×1.00=0.712
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.195, 对话: 0.529, PPL: 4.3(得分1.00), 总分: 0.695×1.00=0.695
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.181, 对话: 0.565, PPL: 4.1(得分1.00), 总分: 0.717×1.00=0.717
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7175, 平均分数: 0.6998
+本代最优融合比例: [0.33056060025361567, 0.6694393997463843]
+
+--- 第 5 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.593, PPL: 4.0(得分1.00), 总分: 0.694×1.00=0.694
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.233, 对话: 0.622, PPL: 4.3(得分1.00), 总分: 0.709×1.00=0.709
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.356, 对话: 0.741, PPL: 3.8(得分1.00), 总分: 0.682×1.00=0.682
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.252, 对话: 0.607, PPL: 4.2(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.208, 对话: 0.637, PPL: 4.0(得分1.00), 总分: 0.730×1.00=0.730
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.236, 对话: 0.653, PPL: 3.8(得分1.00), 总分: 0.720×1.00=0.720
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.600, PPL: 4.0(得分1.00), 总分: 0.697×1.00=0.697
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.217, 对话: 0.592, PPL: 4.0(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.269, 对话: 0.630, PPL: 4.1(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.263, 对话: 0.651, PPL: 3.9(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.204, 对话: 0.600, PPL: 4.0(得分1.00), 总分: 0.717×1.00=0.717
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.216, 对话: 0.666, PPL: 3.8(得分1.00), 总分: 0.737×1.00=0.737
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.176, 对话: 0.545, PPL: 4.3(得分1.00), 总分: 0.712×1.00=0.712
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7366, 平均分数: 0.7030
+本代最优融合比例: [0.6007289688601851, 0.3992710311398149]
+
+--- 第 6 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.666, PPL: 3.8(得分1.00), 总分: 0.696×1.00=0.696
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.654, PPL: 3.8(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.357, 对话: 0.696, PPL: 3.8(得分1.00), 总分: 0.664×1.00=0.664
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.225, 对话: 0.641, PPL: 4.1(得分1.00), 总分: 0.721×1.00=0.721
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.321, 对话: 0.740, PPL: 3.9(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.658, PPL: 3.8(得分1.00), 总分: 0.693×1.00=0.693
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.227, 对话: 0.603, PPL: 4.3(得分1.00), 总分: 0.705×1.00=0.705
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.384, 对话: 0.741, PPL: 3.8(得分1.00), 总分: 0.666×1.00=0.666
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.224, 对话: 0.658, PPL: 3.9(得分1.00), 总分: 0.729×1.00=0.729
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.262, 对话: 0.641, PPL: 3.9(得分1.00), 总分: 0.699×1.00=0.699
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.202, 对话: 0.636, PPL: 3.9(得分1.00), 总分: 0.733×1.00=0.733
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.192, 对话: 0.587, PPL: 4.1(得分1.00), 总分: 0.720×1.00=0.720
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.197, 对话: 0.552, PPL: 4.3(得分1.00), 总分: 0.702×1.00=0.702
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7330, 平均分数: 0.6969
+本代最优融合比例: [0.45670264891324847, 0.5432973510867515]
+
+--- 第 7 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.654, PPL: 3.8(得分1.00), 总分: 0.691×1.00=0.691
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.229, 对话: 0.627, PPL: 4.2(得分1.00), 总分: 0.713×1.00=0.713
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.378, 对话: 0.741, PPL: 3.8(得分1.00), 总分: 0.670×1.00=0.670
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.292, 对话: 0.659, PPL: 3.8(得分1.00), 总分: 0.689×1.00=0.689
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.292, 对话: 0.660, PPL: 3.8(得分1.00), 总分: 0.689×1.00=0.689
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.238, 对话: 0.607, PPL: 4.2(得分1.00), 总分: 0.700×1.00=0.700
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.378, 对话: 0.740, PPL: 3.8(得分1.00), 总分: 0.670×1.00=0.670
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.208, 对话: 0.622, PPL: 4.3(得分1.00), 总分: 0.724×1.00=0.724
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.261, 对话: 0.651, PPL: 4.1(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.256, 对话: 0.643, PPL: 3.9(得分1.00), 总分: 0.704×1.00=0.704
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.196, 对话: 0.553, PPL: 4.3(得分1.00), 总分: 0.704×1.00=0.704
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.165, 对话: 0.601, PPL: 4.2(得分1.00), 总分: 0.741×1.00=0.741
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.166, 对话: 0.587, PPL: 3.9(得分1.00), 总分: 0.735×1.00=0.735
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7413, 平均分数: 0.6992
+本代最优融合比例: [0.29924506078803614, 0.7007549392119639]
+
+--- 第 8 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.268, 对话: 0.628, PPL: 4.2(得分1.00), 总分: 0.690×1.00=0.690
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.174, 对话: 0.666, PPL: 4.0(得分1.00), 总分: 0.762×1.00=0.762
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.198, 对话: 0.666, PPL: 4.0(得分1.00), 总分: 0.747×1.00=0.747
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.260, 对话: 0.631, PPL: 4.2(得分1.00), 总分: 0.696×1.00=0.696
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.217, 对话: 0.628, PPL: 4.0(得分1.00), 总分: 0.721×1.00=0.721
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.271, 对话: 0.639, PPL: 4.0(得分1.00), 总分: 0.693×1.00=0.693
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.279, 对话: 0.635, PPL: 4.1(得分1.00), 总分: 0.687×1.00=0.687
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.271, 对话: 0.592, PPL: 4.0(得分1.00), 总分: 0.674×1.00=0.674
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.230, 对话: 0.606, PPL: 4.3(得分1.00), 总分: 0.704×1.00=0.704
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.263, 对话: 0.647, PPL: 4.1(得分1.00), 总分: 0.701×1.00=0.701
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.204, 对话: 0.628, PPL: 4.0(得分1.00), 总分: 0.729×1.00=0.729
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.208, 对话: 0.625, PPL: 4.0(得分1.00), 总分: 0.725×1.00=0.725
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.221, 对话: 0.596, PPL: 4.0(得分1.00), 总分: 0.706×1.00=0.706
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7287, 平均分数: 0.7005
+本代最优融合比例: [0.4278209655759716, 0.5721790344240284]
+
+--- 第 9 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.318, 对话: 0.744, PPL: 3.8(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.301, 对话: 0.638, PPL: 4.1(得分1.00), 总分: 0.675×1.00=0.675
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.261, 对话: 0.662, PPL: 4.0(得分1.00), 总分: 0.708×1.00=0.708
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.247, 对话: 0.640, PPL: 4.1(得分1.00), 总分: 0.708×1.00=0.708
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.175, 对话: 0.620, PPL: 4.3(得分1.00), 总分: 0.743×1.00=0.743
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.637, PPL: 3.8(得分1.00), 总分: 0.685×1.00=0.685
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.249, 对话: 0.637, PPL: 4.0(得分1.00), 总分: 0.705×1.00=0.705
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.205, 对话: 0.626, PPL: 4.4(得分1.00), 总分: 0.727×1.00=0.727
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.634, PPL: 4.0(得分1.00), 总分: 0.710×1.00=0.710
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.230, 对话: 0.635, PPL: 4.0(得分1.00), 总分: 0.716×1.00=0.716
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.193, 对话: 0.531, PPL: 4.3(得分1.00), 总分: 0.696×1.00=0.696
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.166, 对话: 0.530, PPL: 4.4(得分1.00), 总分: 0.713×1.00=0.713
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.164, 对话: 0.542, PPL: 4.0(得分1.00), 总分: 0.719×1.00=0.719
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7187, 平均分数: 0.7026
+本代最优融合比例: [0.38442751734421177, 0.6155724826557881]
+
+--- 第 10 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.230, 对话: 0.602, PPL: 4.3(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.238, 对话: 0.639, PPL: 3.9(得分1.00), 总分: 0.713×1.00=0.713
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.202, 对话: 0.656, PPL: 4.0(得分1.00), 总分: 0.741×1.00=0.741
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.271, 对话: 0.648, PPL: 4.1(得分1.00), 总分: 0.697×1.00=0.697
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.647, PPL: 3.9(得分1.00), 总分: 0.689×1.00=0.689
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.301, 对话: 0.654, PPL: 4.1(得分1.00), 总分: 0.681×1.00=0.681
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.249, 对话: 0.655, PPL: 4.0(得分1.00), 总分: 0.713×1.00=0.713
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.238, 对话: 0.624, PPL: 4.2(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.217, 对话: 0.656, PPL: 4.0(得分1.00), 总分: 0.732×1.00=0.732
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.242, 对话: 0.607, PPL: 4.5(得分1.00), 总分: 0.698×1.00=0.698
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FULL 1/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.202, 对话: 0.625, PPL: 4.0(得分1.00), 总分: 0.729×1.00=0.729
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FULL 2/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.187, 对话: 0.629, PPL: 4.0(得分1.00), 总分: 0.739×1.00=0.739
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FULL 3/3]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.177, 对话: 0.581, PPL: 3.9(得分1.00), 总分: 0.726×1.00=0.726
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7394, 平均分数: 0.7081
+本代最优融合比例: [0.422217566927724, 0.5777824330722761]
+
+--- 第 11 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.240, 对话: 0.650, PPL: 3.9(得分1.00), 总分: 0.716×1.00=0.716
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.251, 对话: 0.608, PPL: 4.2(得分1.00), 总分: 0.693×1.00=0.693
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.292, 对话: 0.655, PPL: 3.8(得分1.00), 总分: 0.687×1.00=0.687
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.246, 对话: 0.635, PPL: 4.2(得分1.00), 总分: 0.706×1.00=0.706
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.247, 对话: 0.652, PPL: 4.1(得分1.00), 总分: 0.713×1.00=0.713
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.256, 对话: 0.651, PPL: 3.9(得分1.00), 总分: 0.707×1.00=0.707
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.240, 对话: 0.633, PPL: 4.0(得分1.00), 总分: 0.709×1.00=0.709
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.676, PPL: 3.8(得分1.00), 总分: 0.700×1.00=0.700
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.348, 对话: 0.741, PPL: 3.8(得分1.00), 总分: 0.688×1.00=0.688
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.249, 对话: 0.632, PPL: 4.0(得分1.00), 总分: 0.703×1.00=0.703
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 1/10 [FULL 1/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.188, 对话: 0.634, PPL: 3.9(得分1.00), 总分: 0.741×1.00=0.741
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 2/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.186, 对话: 0.583, PPL: 4.1(得分1.00), 总分: 0.722×1.00=0.722
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FULL 3/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.206, 对话: 0.587, PPL: 4.0(得分1.00), 总分: 0.711×1.00=0.711
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FULL 4/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.158, 对话: 0.619, PPL: 3.9(得分1.00), 总分: 0.753×1.00=0.753
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FULL 5/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.195, 对话: 0.580, PPL: 4.2(得分1.00), 总分: 0.715×1.00=0.715
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7530, 平均分数: 0.7113
+本代最优融合比例: [0.5262087437099328, 0.4737912562900672]
+
+--- 第 12 代 ---
+评估候选解 1/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.257, 对话: 0.630, PPL: 4.1(得分1.00), 总分: 0.698×1.00=0.698
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.271, 对话: 0.629, PPL: 4.0(得分1.00), 总分: 0.689×1.00=0.689
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.225, 对话: 0.643, PPL: 4.1(得分1.00), 总分: 0.722×1.00=0.722
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.247, 对话: 0.651, PPL: 3.9(得分1.00), 总分: 0.712×1.00=0.712
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.202, 对话: 0.660, PPL: 4.0(得分1.00), 总分: 0.743×1.00=0.743
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.239, 对话: 0.664, PPL: 4.0(得分1.00), 总分: 0.722×1.00=0.722
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.284, 对话: 0.646, PPL: 3.8(得分1.00), 总分: 0.688×1.00=0.688
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.269, 对话: 0.649, PPL: 4.1(得分1.00), 总分: 0.698×1.00=0.698
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 9/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.301, 对话: 0.652, PPL: 4.0(得分1.00), 总分: 0.680×1.00=0.680
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 10/10 [FAST]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.292, 对话: 0.660, PPL: 3.8(得分1.00), 总分: 0.689×1.00=0.689
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/10 [FULL 1/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.185, 对话: 0.627, PPL: 4.0(得分1.00), 总分: 0.740×1.00=0.740
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/10 [FULL 2/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.184, 对话: 0.581, PPL: 4.1(得分1.00), 总分: 0.722×1.00=0.722
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/10 [FULL 3/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.174, 对话: 0.626, PPL: 4.0(得分1.00), 总分: 0.746×1.00=0.746
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/10 [FULL 4/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.181, 对话: 0.641, PPL: 3.9(得分1.00), 总分: 0.748×1.00=0.748
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/10 [FULL 5/5]...
+  [merge_mode] gpu_full
+  [GPU] before eval: alloc=6.5GB rsv=6.5GB total=85.0GB
+  [SafetyEval:full] API调用: 0/23
+评估结果 - 安全: 0.189, 对话: 0.578, PPL: 4.1(得分1.00), 总分: 0.718×1.00=0.718
+  [GPU] after cleanup: alloc=0.0GB
+最佳分数: 0.7478, 平均分数: 0.7117
+本代最优融合比例: [0.47222759240161755, 0.5277724075983825]
+
+============================================================
+优化完成！
+最优融合系数(归一化): [0.51199168 0.48800832]
+  chat(model_a) = 51.2%
+  base(model_b) = 48.8%
+============================================================
+
+[5/5] 保存融合模型
+
+保存模型到: /root/autodl-tmp/experiments/llama3_3b/merged_model
+[OK] 模型保存成功
+
+======================================================================
+  实验完成!
+======================================================================
+  最佳得分   : 0.7563
+  耗时       : 19989s (333.2min)
+  结果目录   : /root/autodl-tmp/experiments/llama3_3b
+    - merged_model/   融合后模型 + tokenizer
+    - results.yaml    实验结果与优化历史
+======================================================================
+

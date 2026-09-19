@@ -1,0 +1,73 @@
+{
+  "experiment_time": "2026-04-26T17:33:13.895679",
+  "model_a": "/root/autodl-tmp/SmolLM2/it",
+  "model_b": "/root/autodl-tmp/SmolLM2/base",
+  "ratios": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "seed": 42,
+  "results": [
+    {
+      "t": 0.1,
+      "asr": 0.8178,
+      "dialogue": 0.05,
+      "peak_mem_gb": 3.222
+    },
+    {
+      "t": 0.2,
+      "asr": 0.8589,
+      "dialogue": 0.6395,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.3,
+      "asr": 0.8323,
+      "dialogue": 0.6254,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.4,
+      "asr": 0.8963,
+      "dialogue": 0.7228,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.5,
+      "asr": 0.8433,
+      "dialogue": 0.6614,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.6,
+      "asr": 0.7509,
+      "dialogue": 0.5938,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.7,
+      "asr": 0.7752,
+      "dialogue": 0.6159,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.8,
+      "asr": 0.7957,
+      "dialogue": 0.5915,
+      "peak_mem_gb": 3.223
+    },
+    {
+      "t": 0.9,
+      "asr": 0.7682,
+      "dialogue": 0.5271,
+      "peak_mem_gb": 3.223
+    }
+  ]
+}

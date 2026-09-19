@@ -1,0 +1,774 @@
+nohup: ignoring input
+
+======================================================================
+  Universal Evolutionary Model Merge
+======================================================================
+  实验名称 : it x base Evolutionary Merge
+  Model A (chat) : /root/autodl-tmp/llama3_8b/it
+  Model B (base) : /root/autodl-tmp/llama3_8b/base
+  输出目录 : /root/autodl-tmp/experiments/llama8b_perlayer
+  开始时间 : 2026-05-02T23:46:02.529425
+======================================================================
+
+[1/5] 硬件检查
+  GPU  : NVIDIA A800 80GB PCIe
+  VRAM : 79.3 GB
+
+[2/5] 架构兼容性校验
+  Model A 架构: llama  (/root/autodl-tmp/llama3_8b/it)
+  Model B 架构: llama  (/root/autodl-tmp/llama3_8b/base)
+[OK] 架构一致: llama
+
+[3/5] 加载模型
+  merge_method        = slerp
+  use_dora            = False
+  use_dare            = False
+  stage1_popsize      = 8
+  stage1_generations  = 5
+  stage1_sigma        = 0.5
+  use_two_stage_cma   = True
+  stage2_popsize      = 8
+  stage2_generations  = 5
+  stage2_sigma        = 0.15
+  stage3_popsize      = 8
+  stage3_generations  = 5
+  stage3_sigma        = 0.05
+  enable_early_stop   = True
+  early_stop_patience = 3
+  early_stop_min_delta= 0.003
+  low_vram            = True
+  large_model         = never (threshold 4.0B)
+  merge_device        = gpu_full
+  [WARN] gpu_full 模式在融合后将两个源模型同时返回 CPU，可能导致
+         系统 RAM 峰值 ~2×模型大小，大模型请改用 --merge-device-mode gpu_param
+
+加载 2 个源模型...
+  [fix] token_id 列表兼容修复完成: /root/autodl-tmp/llama3_8b/it
+/root/miniconda3/lib/python3.10/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'Could not load this library: /root/miniconda3/lib/python3.10/site-packages/torchvision/image.so'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+[OK] 已加载: /root/autodl-tmp/llama3_8b/it
+[OK] 已加载: /root/autodl-tmp/llama3_8b/base
+[OK] 检测到 transformer 层数: 32
+
+[4/5] CMA-ES 进化优化
+
+============================================================
+开始进化优化...
+============================================================
+  [per-layer inplace] work_model 构建完成，layer_triplets=32 层，global_triplets=3 个全局参数，dtype=torch.bfloat16
+  源模型数: 2
+  搜索模式: 逐层 (per-layer)，每层独立 t ∈ [0,1]
+  Transformer 层数: 32
+  alpha (risk权重): 0.7
+  总搜索维度: 32
+  对话质量门槛: 0.35
+  PPL 门槛: 150.0 (超过视为模型损坏)
+  种群大小(stage1): 8
+  sigma(stage1): 0.5
+  代数(stage1): 5
+  [细搜] 种群大小(stage2): 8
+  [细搜] sigma(stage2): 0.15
+  [细搜] 代数(stage2): 5
+  [精搜] 种群大小(stage3): 8
+  [精搜] sigma(stage3): 0.05
+  [精搜] 代数(stage3): 5
+
+------------------------------------------------------------
+开始 stage1_coarse
+  初始中心: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  sigma: 0.5
+  popsize: 8
+  maxiter: 5
+  early_stop: OFF
+------------------------------------------------------------
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 32 (seed=833140, Sat May  2 23:46:05 2026)
+
+--- stage1_coarse / 第 1 代 ---
+  [CMA] sigma=0.500000
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.708, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.693, PPL: 4.3(得分1.00), 总分: 0.749×1.00=0.749
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.719, PPL: 4.3(得分1.00), 总分: 0.759×1.00=0.759
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.228, 对话: 0.689, PPL: 4.3(得分1.00), 总分: 0.739×1.00=0.739
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.691, PPL: 4.3(得分1.00), 总分: 0.748×1.00=0.748
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.676, PPL: 4.4(得分1.00), 总分: 0.746×1.00=0.746
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.258, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.730×1.00=0.730
+  [GPU] after cleanup: alloc=0.0GB
+[stage1_coarse] 最佳分数: 0.7589, 平均分数: 0.7475
+[stage1_coarse] 本代最优融合比例: [0.3111058270038187, 0.6888941729961813]
+[stage1_coarse] 历史最佳: 0.7589, 连续未显著提升代数: 0/3
+
+--- stage1_coarse / 第 2 代 ---
+  [CMA] sigma=0.468052
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.679, PPL: 4.4(得分1.00), 总分: 0.743×1.00=0.743
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.236, 对话: 0.723, PPL: 4.3(得分1.00), 总分: 0.747×1.00=0.747
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.700, PPL: 4.3(得分1.00), 总分: 0.751×1.00=0.751
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.696, PPL: 4.3(得分1.00), 总分: 0.750×1.00=0.750
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.704, PPL: 4.3(得分1.00), 总分: 0.771×1.00=0.771
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.684, PPL: 4.3(得分1.00), 总分: 0.745×1.00=0.745
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.707, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.696, PPL: 4.3(得分1.00), 总分: 0.750×1.00=0.750
+  [GPU] after cleanup: alloc=0.0GB
+[stage1_coarse] 最佳分数: 0.7710, 平均分数: 0.7514
+[stage1_coarse] 本代最优融合比例: [0.9303904455778798, 0.06960955442212025]
+[stage1_coarse] 历史最佳: 0.7710, 连续未显著提升代数: 0/3
+
+--- stage1_coarse / 第 3 代 ---
+  [CMA] sigma=0.446102
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.773×1.00=0.773
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.774×1.00=0.774
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.706, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.706, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.699, PPL: 4.3(得分1.00), 总分: 0.769×1.00=0.769
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.206, 对话: 0.721, PPL: 4.3(得分1.00), 总分: 0.764×1.00=0.764
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.690, PPL: 4.3(得分1.00), 总分: 0.765×1.00=0.765
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.701, PPL: 4.3(得分1.00), 总分: 0.770×1.00=0.770
+  [GPU] after cleanup: alloc=0.0GB
+[stage1_coarse] 最佳分数: 0.7740, 平均分数: 0.7653
+[stage1_coarse] 本代最优融合比例: [0.5196216622127147, 0.4803783377872854]
+[stage1_coarse] 历史最佳: 0.7740, 连续未显著提升代数: 0/3
+
+--- stage1_coarse / 第 4 代 ---
+  [CMA] sigma=0.432422
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.666, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.707, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.702, PPL: 4.3(得分1.00), 总分: 0.752×1.00=0.752
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.215, 对话: 0.731, PPL: 4.3(得分1.00), 总分: 0.763×1.00=0.763
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.707, PPL: 4.4(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.270, 对话: 0.718, PPL: 4.3(得分1.00), 总分: 0.725×1.00=0.725
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.263, 对话: 0.704, PPL: 4.3(得分1.00), 总分: 0.724×1.00=0.724
+  [GPU] after cleanup: alloc=0.0GB
+[stage1_coarse] 最佳分数: 0.7753, 平均分数: 0.7504
+[stage1_coarse] 本代最优融合比例: [0.27368874989243325, 0.7263112501075668]
+[stage1_coarse] 历史最佳: 0.7740, 连续未显著提升代数: 1/3
+
+--- stage1_coarse / 第 5 代 ---
+  [CMA] sigma=0.422948
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.714, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.697, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.705, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.689, PPL: 4.3(得分1.00), 总分: 0.751×1.00=0.751
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.707, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.698, PPL: 4.3(得分1.00), 总分: 0.751×1.00=0.751
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.708, PPL: 4.3(得分1.00), 总分: 0.759×1.00=0.759
+  [GPU] after cleanup: alloc=0.0GB
+[stage1_coarse] 最佳分数: 0.7589, 平均分数: 0.7544
+[stage1_coarse] 本代最优融合比例: [0.5515861151687267, 0.44841388483127337]
+[stage1_coarse] 历史最佳: 0.7740, 连续未显著提升代数: 2/3
+
+------------------------------------------------------------
+开始 stage2_medium
+  初始中心: [0.6138234871451488, -0.5674657696023332, 0.062320700740686075, -0.3721951024081811, 0.7106778092528925, 0.1180011079710458, 0.9176895482693688, -0.0004012670489124126, -0.7077447381657996, -1.1799301163667237, 0.3808527712443276, 0.4480940109800109, 0.802173614599121, -0.23060085605853503, -0.42905807844009614, -0.45926537461976824, 0.4558225950463246, 0.12381733524582464, -0.4647738329974366, -0.891930410768011, -0.722684325923181, 0.4090353185011675, -0.5225904537941327, -0.5486964792772564, -0.466581660650298, -0.30062106444305436, -0.059991455226795665, 0.012304389255742357, 0.24052218305748968, 1.1883701278190322, 0.4603293617601141, -0.2965804160465929]
+  sigma: 0.15
+  popsize: 8
+  maxiter: 5
+  early_stop: OFF
+------------------------------------------------------------
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 32 (seed=854519, Sun May  3 00:24:41 2026)
+
+--- stage2_medium / 第 1 代 ---
+  [CMA] sigma=0.150000
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.755×1.00=0.755
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.691, PPL: 4.3(得分1.00), 总分: 0.748×1.00=0.748
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.774×1.00=0.774
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.697, PPL: 4.3(得分1.00), 总分: 0.750×1.00=0.750
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.714, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+[stage2_medium] 最佳分数: 0.7738, 平均分数: 0.7567
+[stage2_medium] 本代最优融合比例: [0.713021331559856, 0.286978668440144]
+[stage2_medium] 历史最佳: 0.7738, 连续未显著提升代数: 0/3
+
+--- stage2_medium / 第 2 代 ---
+  [CMA] sigma=0.142830
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.177, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.778×1.00=0.778
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.716, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.716, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.702, PPL: 4.3(得分1.00), 总分: 0.752×1.00=0.752
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.177, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.779×1.00=0.779
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.688, PPL: 4.3(得分1.00), 总分: 0.747×1.00=0.747
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.693, PPL: 4.3(得分1.00), 总分: 0.767×1.00=0.767
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.695, PPL: 4.3(得分1.00), 总分: 0.768×1.00=0.768
+  [GPU] after cleanup: alloc=0.0GB
+[stage2_medium] 最佳分数: 0.7795, 平均分数: 0.7632
+[stage2_medium] 本代最优融合比例: [0.7370770305142932, 0.2629229694857069]
+[stage2_medium] 历史最佳: 0.7795, 连续未显著提升代数: 0/3
+
+--- stage2_medium / 第 3 代 ---
+  [CMA] sigma=0.139966
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.760×1.00=0.760
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.714, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.716, PPL: 4.3(得分1.00), 总分: 0.776×1.00=0.776
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.773×1.00=0.773
+  [GPU] after cleanup: alloc=0.0GB
+[stage2_medium] 最佳分数: 0.7756, 平均分数: 0.7681
+[stage2_medium] 本代最优融合比例: [0.7175787597214354, 0.2824212402785647]
+[stage2_medium] 历史最佳: 0.7795, 连续未显著提升代数: 1/3
+
+--- stage2_medium / 第 4 代 ---
+  [CMA] sigma=0.138193
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.697, PPL: 4.3(得分1.00), 总分: 0.768×1.00=0.768
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.774×1.00=0.774
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.760×1.00=0.760
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.709, PPL: 4.3(得分1.00), 总分: 0.755×1.00=0.755
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.696, PPL: 4.3(得分1.00), 总分: 0.768×1.00=0.768
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.708, PPL: 4.3(得分1.00), 总分: 0.773×1.00=0.773
+  [GPU] after cleanup: alloc=0.0GB
+[stage2_medium] 最佳分数: 0.7740, 平均分数: 0.7641
+[stage2_medium] 本代最优融合比例: [0.6296372493146197, 0.3703627506853802]
+[stage2_medium] 历史最佳: 0.7795, 连续未显著提升代数: 2/3
+
+--- stage2_medium / 第 5 代 ---
+  [CMA] sigma=0.136563
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.700, PPL: 4.3(得分1.00), 总分: 0.769×1.00=0.769
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.774×1.00=0.774
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.697, PPL: 4.3(得分1.00), 总分: 0.768×1.00=0.768
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.714, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.709, PPL: 4.3(得分1.00), 总分: 0.773×1.00=0.773
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.692, PPL: 4.3(得分1.00), 总分: 0.766×1.00=0.766
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.697, PPL: 4.3(得分1.00), 总分: 0.768×1.00=0.768
+  [GPU] after cleanup: alloc=0.0GB
+[stage2_medium] 最佳分数: 0.7755, 平均分数: 0.7711
+[stage2_medium] 本代最优融合比例: [0.6781822500932321, 0.32181774990676787]
+[stage2_medium] 历史最佳: 0.7795, 连续未显著提升代数: 3/3
+
+------------------------------------------------------------
+开始 stage3_fine
+  初始中心: [0.8963900207674547, -0.31975155420741797, 0.2727130241953795, -0.1989040557131747, 0.579117488925485, 0.08535734748592298, 0.9371533758003012, -0.28045813931991836, -0.529236814648359, -1.0333055741653865, 0.40301420283665784, 0.29509468939982997, 0.7568114256873062, -0.017433869151914222, -0.5072617867362872, -0.5112630310139477, -0.005605732992025214, -0.0710773402987141, -0.27196122156481983, -1.2557403265003693, -0.6773449810311888, 0.5989213366156431, -0.7476831552041585, -0.6727643468089186, -0.2145164040519147, 0.18988189559687857, -0.11900264295678276, 0.02014448274415183, 0.13482747471039985, 0.8138556405247526, 0.18759957404326655, -0.26439909448894]
+  sigma: 0.05
+  popsize: 8
+  maxiter: 5
+  early_stop: ON
+------------------------------------------------------------
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 32 (seed=895141, Sun May  3 01:01:38 2026)
+
+--- stage3_fine / 第 1 代 ---
+  [CMA] sigma=0.050000
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.720, PPL: 4.3(得分1.00), 总分: 0.760×1.00=0.760
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.708, PPL: 4.3(得分1.00), 总分: 0.754×1.00=0.754
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.236, 对话: 0.716, PPL: 4.3(得分1.00), 总分: 0.745×1.00=0.745
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+[stage3_fine] 最佳分数: 0.7753, 平均分数: 0.7599
+[stage3_fine] 本代最优融合比例: [0.7191084113972198, 0.28089158860278024]
+[stage3_fine] 历史最佳: 0.7753, 连续未显著提升代数: 0/3
+
+--- stage3_fine / 第 2 代 ---
+  [CMA] sigma=0.046810
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.774×1.00=0.774
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.718, PPL: 4.3(得分1.00), 总分: 0.759×1.00=0.759
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.776×1.00=0.776
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+[stage3_fine] 最佳分数: 0.7760, 平均分数: 0.7684
+[stage3_fine] 本代最优融合比例: [0.7408769548261038, 0.25912304517389617]
+[stage3_fine] 历史最佳: 0.7753, 连续未显著提升代数: 1/3
+
+--- stage3_fine / 第 3 代 ---
+  [CMA] sigma=0.044294
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.755×1.00=0.755
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.712, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.177, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.778×1.00=0.778
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.715, PPL: 4.3(得分1.00), 总分: 0.775×1.00=0.775
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.710, PPL: 4.3(得分1.00), 总分: 0.755×1.00=0.755
+  [GPU] after cleanup: alloc=0.0GB
+[stage3_fine] 最佳分数: 0.7781, 平均分数: 0.7612
+[stage3_fine] 本代最优融合比例: [0.7193514203488036, 0.28064857965119644]
+[stage3_fine] 历史最佳: 0.7753, 连续未显著提升代数: 2/3
+
+--- stage3_fine / 第 4 代 ---
+  [CMA] sigma=0.042195
+评估候选解 1/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.207, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.762×1.00=0.762
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 2/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 3/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.184, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.776×1.00=0.776
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 4/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.717, PPL: 4.3(得分1.00), 总分: 0.758×1.00=0.758
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 5/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.696, PPL: 4.3(得分1.00), 总分: 0.750×1.00=0.750
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 6/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.713, PPL: 4.3(得分1.00), 总分: 0.757×1.00=0.757
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 7/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+评估候选解 8/8...
+  [GPU] before eval: alloc=0.0GB rsv=0.0GB total=85.1GB
+  [SafetyEval:fast] API调用: 0/10
+评估结果 - 安全: 0.214, 对话: 0.711, PPL: 4.3(得分1.00), 总分: 0.756×1.00=0.756
+  [GPU] after cleanup: alloc=0.0GB
+[stage3_fine] 最佳分数: 0.7760, 平均分数: 0.7590
+[stage3_fine] 本代最优融合比例: [0.7092927719906721, 0.29070722800932797]
+[stage3_fine] 历史最佳: 0.7753, 连续未显著提升代数: 3/3
+[EARLY STOP] stage3_fine 提前结束：连续 3 代提升 < 0.0030
+
+============================================================
+优化完成！
+  使用 global_best_score=0.7795 重建最终模型
+最优融合系数(归一化): [0.73707703 0.26292297]
+  chat(model_a) = 73.7%
+  base(model_b) = 26.3%
+============================================================
+  [final-merge] 复用评估时 seed=398898250
+
+[5/5] 保存融合模型
+
+保存模型到: /root/autodl-tmp/experiments/llama8b_perlayer/merged_model
+[OK] 模型保存成功
+
+======================================================================
+  实验完成!
+======================================================================
+  最佳得分   : 0.7795
+  耗时       : 6320s (105.3min)
+  结果目录   : /root/autodl-tmp/experiments/llama8b_perlayer
+    - merged_model/   融合后模型 + tokenizer
+    - results.yaml    实验结果与优化历史
+======================================================================
+

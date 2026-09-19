@@ -1,0 +1,73 @@
+{
+  "experiment_time": "2026-04-26T19:05:29.231566",
+  "model_a": "/root/autodl-tmp/llama3_3b/it",
+  "model_b": "/root/autodl-tmp/llama3_3b/base",
+  "ratios": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "seed": 42,
+  "results": [
+    {
+      "t": 0.1,
+      "asr": 0.6953,
+      "dialogue": 0.7115,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.2,
+      "asr": 0.5863,
+      "dialogue": 0.7171,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.3,
+      "asr": 0.657,
+      "dialogue": 0.6813,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.4,
+      "asr": 0.6876,
+      "dialogue": 0.6236,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.5,
+      "asr": 0.7412,
+      "dialogue": 0.5146,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.6,
+      "asr": 0.7901,
+      "dialogue": 0.4489,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.7,
+      "asr": 0.7473,
+      "dialogue": 0.5192,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.8,
+      "asr": 0.7901,
+      "dialogue": 0.5384,
+      "peak_mem_gb": 6.011
+    },
+    {
+      "t": 0.9,
+      "asr": 0.672,
+      "dialogue": 0.501,
+      "peak_mem_gb": 6.01
+    }
+  ]
+}
