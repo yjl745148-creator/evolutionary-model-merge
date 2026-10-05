@@ -1,107 +1,76 @@
-# Evolutionary Model Merge
+# Evolutionary Model Merge (EMMA)
 
-**English** | [简体中文](README.zh-CN.md)
+EMMA uses CMA-ES to search merging parameters for two compatible Hugging Face causal language models. The repository contains global and layer-wise merging implementations, safety and dialogue evaluation, fixed-ratio ablation experiments, and paper figure sources.
 
-This project uses CMA-ES to search merge parameters for two same-architecture
-Hugging Face causal language models, and ships scripts for ratio ablation,
-per-layer search, model comparison, and result plotting.
+## Repository Layout
 
-> ⚠️ **Responsible use**: This project includes safety / red-teaming evaluation
-> capabilities (Attack Success Rate, ASR) that probe how a model behaves under
-> harmful requests. It is intended solely for AI-safety research, alignment
-> evaluation, and defensive purposes. See [Responsible Use](#responsible-use) below.
+| Path | Contents |
+|---|---|
+| [code/](code/README.md) | Model merging, search, evaluation, and ablation scripts. |
+| [Figure_Code/](Figure_Code/README.md) | Paper figure sources and search-result plotting. |
+| [date/](date/) | Stored experiment reports, search histories, and logs. |
+| [requirements.txt](requirements.txt) | Dependencies for the experiment code. |
+| [LICENSE](LICENSE) | Project license. |
 
-## Requirements
+All commands below are run from this `main/` directory. The experiment-record directory is named `date/`; evaluation prompt files use the separate path `code/data/eval/`.
 
-Python 3.10 or 3.11 is recommended. Install dependencies with:
+## Setup
+
+Use Python 3.10 or 3.11 and install the dependencies:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-Model merging generally needs a CUDA GPU. CPU works for some checks, but full
-experiments are slow.
+Provide compatible chat/instruct and base checkpoints. Model dimensions, layer structure, vocabulary, and embedding configuration must support the selected merging method. Full experiments generally require a CUDA GPU with sufficient memory.
 
-Optional LLM-judge API configuration:
+For API-based judging, configure the selected provider. For example, in a Bash shell:
 
 ```bash
-# Qwen / DashScope
 export LLM_PROVIDER=qwen
-export QWEN_API_KEY="..."
-
-# OpenAI
-export LLM_PROVIDER=openai
-export OPENAI_API_KEY="..."
+export QWEN_API_KEY="your-api-key"
 ```
 
-If the corresponding API key is unset, the merge stage warns explicitly and
-falls back to rule-based scoring only.
+Alternatively, set `LLM_PROVIDER=openai` and `OPENAI_API_KEY`. The merge-stage evaluator can fall back to rule-based scoring when no corresponding API key is available; this fallback is distinct from formal API-judge evaluation.
 
-## Main entry point
+## Model Merging
 
-Global merge:
+Global search:
 
 ```bash
-python run_merge.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/example \
-  --seed 42
+python code/run_merge.py --model-a /path/to/chat_model --model-b /path/to/base_model --output experiments/global_run --seed 42
 ```
 
-Low-VRAM mode:
+Layer-wise search:
 
 ```bash
-python run_merge.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/example \
-  --low-vram
+python code/run_merge.py --model-a /path/to/chat_model --model-b /path/to/base_model --output experiments/layer_run --per-layer-search --per-layer-alpha 0.7 --seed 42
 ```
 
-Per-layer search:
-
-```bash
-python run_merge.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/per-layer \
-  --per-layer-search \
-  --per-layer-alpha 0.7 \
-  --large-model never
-```
-
-`--per-layer-alpha` controls the risk weight in the per-layer objective:
+For the layer-wise objective, `--per-layer-alpha` controls the risk weight in the base weighted term:
 
 ```text
 alpha * (1 - safety_score) + (1 - alpha) * dialogue_score
 ```
 
-## Resume from checkpoint
+The implementation then applies the PPL factor and, when enabled, the repetition factor. These search proxy scores are distinct from the formal evaluation metrics.
+
+Use `--low-vram` for the low-memory configuration and `python code/run_merge.py --help` for additional options.
+
+To rebuild a merged model from saved best parameters:
 
 ```bash
-python run_merge.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/example \
-  --resume
+python code/run_merge.py --model-a /path/to/chat_model --model-b /path/to/base_model --output experiments/layer_run --resume
 ```
 
-Resume supports:
+Here, `--resume` reads saved best parameters and exports the merged model without continuing CMA-ES optimization. Use the same source checkpoints and compatible settings as the original run.
 
-- two-model global scalar search
-- DataFlow routing parameters
-- DARE drop rate and its random seed
-- per-layer search parameters
+## Evaluation Data
 
-The CLI/YAML config used to resume must match the one that produced the checkpoint.
-
-## Data directory
-
-`compare_models.py` looks for the following under the project's `data/eval/`:
+The current evaluation code resolves prompt files relative to `code/compare_models.py`:
 
 ```text
-data/eval/
+code/data/eval/
   mt_bench_questions.jsonl
   alpaca_eval.json
   advbench_behaviors.jsonl
@@ -109,148 +78,56 @@ data/eval/
   jailbreakbench_behaviors.jsonl
 ```
 
-If a file is missing, the script falls back to a small built-in prompt set.
-These harmful-evaluation datasets are **not distributed with this repository**;
-obtain them from their official sources (see [Dataset sources](#dataset-sources))
-and comply with each dataset's license.
+Prepare these files in the formats expected by the loaders in `compare_models.py`. Missing files trigger built-in prompt fallbacks, so provide the intended datasets and sample counts when reproducing a specific evaluation protocol.
 
-## Model comparison
+Dataset sources:
 
-```bash
-python compare_models.py \
-  --merged experiments/example/merged_model \
-  --chat /path/to/chat-model \
-  --base /path/to/base-model \
-  --output experiments/example/comparison_report.json
-```
+- [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge)
+- [AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)
+- [AdvBench](https://github.com/llm-attacks/llm-attacks)
+- [HarmBench](https://github.com/centerforaisafety/HarmBench)
+- [JailbreakBench](https://github.com/JailbreakBench/jailbreakbench)
 
-**Prompt policy**: during evaluation all three models (merged/chat/base) apply
-their own tokenizer chat template; models without a template (typically the base
-model) automatically fall back to a raw prompt. Evaluation injects **no system
-prompt** (including no safety prompt). Empty responses are excluded and flagged
-rather than scored as 0.
+## Model Evaluation
 
-If all judge requests fail, the script raises an error instead of recording an
-ASR of 0 from zero valid samples.
-
-## Other scripts
-
-Ratio ablation:
+Compare merged, chat, and base models:
 
 ```bash
-python ablation_merge_ratio.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/ablation
+python code/compare_models.py --merged experiments/global_run/merged_model --chat /path/to/chat_model --base /path/to/base_model --output experiments/global_run/comparison_report.json
 ```
 
-Standalone per-layer heatmap search:
+The current comparison entry point uses each model's tokenizer chat template when available, with a raw-prompt fallback when no template exists, and injects no system prompt. Empty dialogue responses and failed dialogue-judge calls are excluded from the dialogue mean; an evaluation with no valid dialogue scores raises an error.
+
+For dialogue-only reevaluation:
 
 ```bash
-python layer_heatmap.py \
-  --model-a /path/to/chat-model \
-  --model-b /path/to/base-model \
-  --output experiments/layer-heatmap
+python code/retest_it_dialogue_deepseek.py --model-path /path/to/model --model-id model_to_retest --prompt-mode chat_template_no_system --judge-model YOUR_JUDGE_MODEL --base-url YOUR_JUDGE_BASE_URL --api-key-env YOUR_KEY_ENV --output experiments/dialogue_retest.json
 ```
 
-Re-plot per-layer results:
+Set the named environment variable to the judge API key before running. This script evaluates dialogue only and records individual responses, judge outputs, and errors. If `--source-report` is supplied without `--model-path`, the model path is taken from the report's `models.chat` field. To reevaluate a merged model, pass its path explicitly. Keep judge and prompt settings explicit when comparing results.
+
+## Ablation and Plotting
+
+Run a fixed-ratio SLERP ablation:
 
 ```bash
-python plot_merge_result.py \
-  --output-dir experiments/per-layer
+python code/ablation_merge_ratio.py --model-a /path/to/chat_model --model-b /path/to/base_model --output experiments/ratio_ablation
 ```
 
-Dialogue-only retest (DeepSeek judge):
-
-`retest_it_dialogue_deepseek.py` re-evaluates **only the dialogue score**
-(MT-Bench + AlpacaEval). It skips the safety/ASR evaluation and uses an
-independent DeepSeek V4 Pro judge.
-
-**Why it exists:** in some runs the dialogue scores from the main
-`compare_models.py` come out as an all-zero column — for example the model under
-test returns empty responses under the given prompt format, or the primary judge
-call fails — which makes that model's dialogue ability invalid/underestimated.
-Rather than rerunning the full comparison, use this script to re-test just the
-dialogue score for the affected model (e.g. the merged / m2 model) and cross-check
-it with a separate judge. Every item is recorded (input prompt, model response,
-raw judge output, parsed score, and any error) for debugging.
+Run the separate layer-wise search workflow with coefficient visualization:
 
 ```bash
-# Option 1: point at the model directly
-python retest_it_dialogue_deepseek.py \
-  --model-path /path/to/m2_model \
-  --model-id m2 \
-  --output experiments/example/m2_dialogue_retest.json
-
-# Option 2: inherit model path / sample counts / prompt mode from an existing report
-python retest_it_dialogue_deepseek.py \
-  --source-report experiments/example/comparison_report.json \
-  --output experiments/example/m2_dialogue_retest.json
+python code/layer_heatmap.py --model-a /path/to/chat_model --model-b /path/to/base_model --output experiments/layer_heatmap_run
 ```
 
-The judge API key is read from an environment variable (use `--api-key-env` to
-choose which one); the judge model defaults to `deepseek-v4-pro` (override with
-`--judge-model` / `--base-url`).
+Plot an existing per-layer search result:
 
-## Output files
-
-A typical merge run produces:
-
-```text
-experiments/example/
-  best_so_far.json
-  latest_generation_best.json
-  generation_best.jsonl
-  results.yaml
-  merged_model/
+```bash
+python Figure_Code/plot_merge_result.py --output-dir experiments/layer_run
 ```
 
-Each new (non-resume) run re-initializes this run's `generation_best.jsonl` and
-the global-best record, so old experiments do not contaminate a new run.
-`--resume` does not re-run CMA-ES.
+For paper figure inputs, dependencies, and plotting functions, see [Figure_Code/README.md](Figure_Code/README.md). For individual experiment scripts, see [code/README.md](code/README.md).
 
-The three CMA stages use `seed`, `seed + 1`, and `seed + 2` respectively, so the
-candidate sequence is reproducible under the same config and environment.
+## Research Use
 
-## Dataset sources
-
-The evaluation datasets below are **not included in this repository**. Download
-them from their official sources, place them under `data/eval/`, and comply with
-each one's license / terms of use:
-
-- **MT-Bench** — https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge
-- **AlpacaEval** — https://github.com/tatsu-lab/alpaca_eval
-- **AdvBench** — https://github.com/llm-attacks/llm-attacks
-- **HarmBench** — https://github.com/centerforaisafety/HarmBench
-- **JailbreakBench** — https://github.com/JailbreakBench/jailbreakbench
-
-The last three are harmful-behavior prompt datasets used only for safety evaluation.
-
-## Responsible use
-
-This project is intended for **AI-safety research and alignment evaluation**. Its
-Attack Success Rate (ASR) evaluation sends harmful requests to the model under
-test and scores the responses in order to **measure and improve** model safety —
-not to generate or spread harmful content.
-
-By using this software you agree to:
-
-- use it only for lawful research, evaluation, and defensive purposes;
-- not generate, distribute, or operationalize content or actions that cause
-  real-world harm;
-- comply with the licenses of the models, datasets, and APIs you use, and with
-  applicable laws and regulations;
-- take full responsibility for any harmful datasets you obtain and place under
-  `data/eval/`.
-
-The authors accept no liability for misuse of this software. See [LICENSE](LICENSE).
-
-## Notes
-
-- The two source models must have compatible layer count, hidden size, attention
-  heads, vocabulary, and embedding configuration.
-- `--trust-remote-code` is off by default; enable it only for trusted models.
-- On receiving a termination signal, the program stops after finishing the
-  current candidate evaluation and does not enter later CMA stages.
-
-
+This project supports AI-safety research and alignment evaluation. Follow the licenses and terms of the models, datasets, and APIs used in an experiment, and do not use the software to facilitate real-world harm. See [LICENSE](LICENSE).
