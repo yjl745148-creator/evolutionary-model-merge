@@ -48,3 +48,7 @@ python Figure_Code/plot_merge_result.py --output-dir experiments/per_layer_run
 ```
 
 This separate diagnostic tool reads `best_so_far.json` and available convergence records. Use `--save` to choose its image output path.
+
+## Figures 6 and 8 Layout
+
+Both figures place a compact horizontal legend inside the lower-right corner of the first panel. Figure 6 identifies each metric through its x-axis label. Figure 8 uses small black model labels below the axes. SVG outputs contain vector paths and can be inserted into the manuscript.

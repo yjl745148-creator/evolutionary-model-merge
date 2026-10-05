@@ -64,12 +64,12 @@ def build_figure6() -> dict[str, object]:
         ("smollm2", "SmolLM2 (1.7B)"),
     ]
     metrics = [
-        ("dialogue", "(a) Dialogue quality", (0, 7.2), [0, 2, 4, 6], "Score (0–10)", 2),
-        ("asr", "(b) Overall ASR", (0, 75), [0, 20, 40, 60], "Attack success rate (%)", 1),
-        ("composite", "(c) Composite score", (0, 6.2), [0, 2, 4, 6], "Score (0–10)", 2),
+        ("dialogue", "(a) Dialogue quality", (0, 7.2), [0, 2, 4, 6], "Dialogue score (0–10)", 2),
+        ("asr", "(b) Overall ASR", (0, 75), [0, 20, 40, 60], "ASR (%)", 1),
+        ("composite", "(c) Composite score", (0, 6.2), [0, 2, 4, 6], "Composite score (0–10)", 2),
     ]
-    fig, axes = plt.subplots(1, 3, figsize=(6.5, 2.72), sharey=True, facecolor="white")
-    fig.subplots_adjust(left=0.175, right=0.985, bottom=0.20, top=0.79, wspace=0.16)
+    fig, axes = plt.subplots(1, 3, figsize=(6.5, 2.6), sharey=True, facecolor="white")
+    fig.subplots_adjust(left=0.175, right=0.985, bottom=0.16, top=0.96, wspace=0.16)
     y_values = [2.2, 1.1, 0.0]
     for ax_index, (ax, metric_spec) in enumerate(zip(axes, metrics)):
         metric, title, xlim, xticks, xlabel, decimals = metric_spec
@@ -89,16 +89,15 @@ def build_figure6() -> dict[str, object]:
             ax.annotate(fmt.format(merged), (merged, y), xytext=(0, 8), textcoords="offset points", ha="center", color=BLUE, fontsize=7.4, weight="bold")
             ax.annotate(fmt.format(chat), (chat, y), xytext=(0, -10), textcoords="offset points", ha="center", color=TEAL, fontsize=7.2)
             ax.annotate(fmt.format(base), (base, base_y), xytext=(0, -10), textcoords="offset points", ha="center", color=RED, fontsize=7.1)
-        ax.set_title(title, color=NAVY, pad=9)
         clean_axis(ax, xlim=xlim, xticks=xticks, xlabel=xlabel)
     axes[0].set_yticks(y_values, [name for _, name in models])
-    axes[0].set_ylim(-0.92, 2.65)
+    axes[0].set_ylim(-1.3, 2.65)
     handles = [
         Line2D([], [], marker="o", color="none", markerfacecolor=BLUE, markeredgecolor="white", markersize=7.5, label="Merged"),
         Line2D([], [], marker="o", color="none", markerfacecolor="white", markeredgecolor=TEAL, markeredgewidth=1.6, markersize=7.5, label="Chat"),
         Line2D([], [], marker="D", color="none", markerfacecolor=RED, markeredgecolor="white", markersize=6.8, label="Base"),
     ]
-    fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.58, 0.985), handletextpad=0.45, columnspacing=1.4)
+    axes[0].legend(handles=handles, loc="lower right", ncol=3, frameon=False, bbox_to_anchor=(0.99, 0.01), borderaxespad=0.1, handlelength=0.9, handletextpad=0.25, columnspacing=0.55, markerscale=0.8, fontsize=7.1)
     result = save_matplotlib_figure(
         fig,
         OUT / "figure06_model_comparison",
@@ -117,8 +116,8 @@ def build_figure8() -> dict[str, object]:
         ("SmolLM2 (1.7B)", "+28.7 pp"),
     ]
     datasets = ["AdvBench", "HarmBench", "JailbreakBench", "Overall"]
-    fig, axes = plt.subplots(1, 3, figsize=(6.5, 2.92), sharey=True, facecolor="white")
-    fig.subplots_adjust(left=0.18, right=0.985, bottom=0.17, top=0.79, wspace=0.12)
+    fig, axes = plt.subplots(1, 3, figsize=(6.5, 3.05), sharey=True, facecolor="white")
+    fig.subplots_adjust(left=0.18, right=0.985, bottom=0.19, top=0.92, wspace=0.12)
     y_values = [3.3, 2.2, 1.1, 0.0]
     for index, (ax, (model, gain)) in enumerate(zip(axes, models)):
         gain = f"{percentage(grouped[model]['Merged']['Overall']) - percentage(grouped[model]['Chat']['Overall']):+.1f} pp"
@@ -136,17 +135,17 @@ def build_figure8() -> dict[str, object]:
             ax.annotate(f"{merged:.0f}", (merged, y), xytext=(0, 8), textcoords="offset points", ha="center", color=BLUE, fontsize=7.3, weight="bold")
             ax.annotate(f"{chat:.0f}", (chat, y), xytext=(0, -8), textcoords="offset points", ha="center", color=TEAL, fontsize=7.1)
             ax.annotate(f"{base:.0f}", (base, base_y), xytext=(0, -9), textcoords="offset points", ha="center", color=RED, fontsize=7.0)
-        ax.set_title(f"({chr(97 + index)}) {model}", color=NAVY, pad=15)
+        ax.text(0.5, -0.19, f"({chr(97 + index)}) {model}", transform=ax.transAxes, ha="center", va="top", color="black", fontsize=8.5, weight="normal")
         ax.text(0.5, 1.015, f"Overall gain vs. Chat: {gain}", transform=ax.transAxes, ha="center", va="bottom", color=TEAL, fontsize=7.5, weight="bold")
         clean_axis(ax, xlim=(0, 80), xticks=[0, 20, 40, 60, 80], xlabel="ASR (%)")
     axes[0].set_yticks(y_values, datasets)
-    axes[0].set_ylim(-0.82, 3.74)
+    axes[0].set_ylim(-1.3, 3.74)
     handles = [
         Line2D([], [], marker="o", color="none", markerfacecolor=BLUE, markeredgecolor="white", markersize=7.5, label="Merged"),
         Line2D([], [], marker="o", color="none", markerfacecolor="white", markeredgecolor=TEAL, markeredgewidth=1.6, markersize=7.5, label="Chat"),
         Line2D([], [], marker="D", color="none", markerfacecolor=RED, markeredgecolor="white", markersize=6.8, label="Base"),
     ]
-    fig.legend(handles=handles, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.58, 0.985), handletextpad=0.45, columnspacing=1.4)
+    axes[0].legend(handles=handles, loc="lower right", ncol=3, frameon=False, bbox_to_anchor=(0.99, 0.01), borderaxespad=0.1, handlelength=0.9, handletextpad=0.25, columnspacing=0.55, markerscale=0.8, fontsize=7.1)
     result = save_matplotlib_figure(
         fig,
         OUT / "figure08_dataset_asr",
