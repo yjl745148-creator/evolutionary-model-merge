@@ -1,0 +1,7 @@
+# Static import inventory; versions are not pinned or runtime-validated.
+matplotlib
+numpy
+PyYAML
+Pillow
+CairoSVG
+reportlab
