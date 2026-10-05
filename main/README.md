@@ -8,7 +8,7 @@ EMMA uses CMA-ES to search merging parameters for two compatible Hugging Face ca
 |---|---|
 | [code/](code/README.md) | Model merging, search, evaluation, and ablation scripts. |
 | [Figure_Code/](Figure_Code/README.md) | Paper figure sources and search-result plotting. |
-| [date/](date/) | Stored experiment reports, search histories, and logs. |
+| [date/](date/README.md) | Stored experiment reports, search histories, and logs. |
 | [requirements.txt](requirements.txt) | Dependencies for the experiment code. |
 | [LICENSE](LICENSE) | Project license. |
 
