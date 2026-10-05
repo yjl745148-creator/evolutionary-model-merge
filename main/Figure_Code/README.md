@@ -11,6 +11,7 @@ Python plotting sources for Figures 5–13 of the EMMA paper.
 | 7, 9, 10, 12 | Mixing trade-off, layer coefficients, formal convergence, and layer-segment statistics | `figures07_09_10_12_tradeoff_and_layers.py` |
 | 11 | Test-search convergence | `figure11_test_convergence.py` |
 | 13 | Run-log search convergence | `figure13_runlog_convergence.py` |
+| Search diagnostics | Layer coefficients and convergence from an existing search run | `plot_merge_result.py` |
 
 ## Dependencies and Inputs
 
@@ -37,3 +38,13 @@ For Figures 6 and 8, use `setup_matplotlib()` followed by `build_figure6()` or `
 For Figures 7, 9, 10, and 12, the corresponding functions are `fig5_ablation_tradeoff()`, `fig4_layer_coefficients_overview()`, `figA4_formal_layer_convergence()`, and `figA5_layer_segment_stats()`. Initialize the style and load the required records first; function names retain historical numbering.
 
 For Figure 5, update the helper-file reference to `figure05_plot_helpers.py` and configure the coefficient-evidence path. The other dedicated scripts expose `main()` entry points once their input and output paths are configured.
+
+## Search Result Plotting
+
+To visualize an existing per-layer search result, run this command from the repository's `main/` directory:
+
+```bash
+python Figure_Code/plot_merge_result.py --output-dir experiments/per_layer_run
+```
+
+The script reads `best_so_far.json` and available convergence records from the specified directory. Use `--save` to specify the output image path.

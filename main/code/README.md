@@ -11,7 +11,6 @@ Implementation of evolutionary model merging, evaluation, and experiment analysi
 | `compare_models.py` | Safety and dialogue evaluation of merged, chat, and base models. |
 | `ablation_merge_ratio.py` | Fixed-ratio SLERP sweep with evaluation across mixing coefficients. |
 | `layer_heatmap.py` | Per-layer CMA-ES search with fast/full evaluation and coefficient visualization. |
-| `plot_merge_result.py` | Plot coefficients and convergence from an existing search output directory. |
 | `retest_it_dialogue_deepseek.py` | Dialogue-only reevaluation of a chat/instruct model with a configurable API judge. |
 
 ## Setup
@@ -43,7 +42,7 @@ python code/ablation_merge_ratio.py --model-a /path/to/chat_model --model-b /pat
 Plot an existing per-layer search result:
 
 ```bash
-python code/plot_merge_result.py --output-dir experiments/per_layer_run
+python Figure_Code/plot_merge_result.py --output-dir experiments/per_layer_run
 ```
 
 The plotting command reads `best_so_far.json` and available convergence records. Use each script's `--help` for its options. Paper figure sources are maintained separately in `../Figure_Code/`.
