@@ -12,16 +12,15 @@ import numpy as np
 from matplotlib import font_manager
 
 
-ROOT = Path(__file__).resolve().parents[1]
-FIG_DIR = ROOT / "figures_and_tables" / "figures"
-VECTOR_DIR = ROOT / "矢量图"
-FONT_DIR = ROOT / "Times new Roman"
+from figure_common import DATA_DIR, output_dir, setup_font, require_file
+ROOT = DATA_DIR
+FIG_DIR = output_dir()
 
 LATIN = "Times New Roman"
 MODEL_ORDER = ["llama3b", "llama8b", "smollm2"]
 MODEL_LABELS = {
-    "llama3b": "Llama-3.2-3B",
-    "llama8b": "Llama-3.1-8B",
+    "llama3b": "LLaMA3-3B",
+    "llama8b": "LLaMA3-8B",
     "smollm2": "SmolLM2 (1.7B)",
 }
 MODEL_COLORS = {
@@ -48,23 +47,20 @@ class Curve:
     reach95_progress: float | None
 
 
-def register_times() -> None:
-    for name in ("times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf"):
-        path = FONT_DIR / name
-        if path.exists():
-            font_manager.fontManager.addfont(str(path))
+def register_times():
+    setup_font()
 
 
 def configure_fonts() -> None:
-    register_times()
+    family = setup_font()
     mpl.rcParams.update(
         {
-            "font.family": LATIN,
-            "font.serif": [LATIN],
+
+            "font.serif": [family],
             "mathtext.fontset": "custom",
-            "mathtext.rm": LATIN,
-            "mathtext.it": f"{LATIN}:italic",
-            "mathtext.bf": f"{LATIN}:bold",
+            "mathtext.rm": family,
+            "mathtext.it": f"{family}:italic",
+            "mathtext.bf": f"{family}:bold",
             "svg.fonttype": "none",
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
@@ -132,30 +128,21 @@ def load_curve(path: Path) -> Curve | None:
 
 def load_curves() -> list[Curve]:
     curves = []
-    for path in ROOT.rglob("history.json"):
+    for path in sorted(ROOT.glob("*/layer_search_test/**/history.json")):
         curve = load_curve(path)
         if curve is not None:
             curves.append(curve)
+    if set(c.model for c in curves) != set(MODEL_ORDER):
+        raise ValueError(f"Missing test histories under {ROOT}")
     curves.sort(key=lambda c: (MODEL_ORDER.index(c.model), c.run_label))
     return curves
 
 
-def save_all(fig: plt.Figure, stem: str) -> list[Path]:
-    FIG_DIR.mkdir(parents=True, exist_ok=True)
-    VECTOR_DIR.mkdir(parents=True, exist_ok=True)
-    outputs = [
-        FIG_DIR / f"{stem}.png",
-        FIG_DIR / f"{stem}.pdf",
-        FIG_DIR / f"{stem}.svg",
-        VECTOR_DIR / "Figure12_v14.png",
-        VECTOR_DIR / "Figure12_v14.pdf",
-        VECTOR_DIR / "Figure12_v14.svg",
-    ]
+def save_all(fig, stem):
+    outputs = [FIG_DIR / f"figure11_test_convergence.{ext}" for ext in ("png", "pdf", "svg")]
     for path in outputs:
-        if path.suffix == ".png":
-            fig.savefig(path, dpi=300)
-        else:
-            fig.savefig(path)
+        fig.savefig(path, dpi=300)
+    plt.close(fig)
     return outputs
 
 

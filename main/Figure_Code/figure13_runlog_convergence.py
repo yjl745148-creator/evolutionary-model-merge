@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Figure 12 — Run-log search convergence by candidate evaluation, REDESIGNED.
-3-panel STACKED layout (one model per row), each panel wider & taller than
-the previous side-by-side version, so reviewers can read every datapoint.
-Academic styling: subtle alternating stage bands, single-hue model accent,
-clean grid, no top/right spines, shared legend above the suptitle.
-Output: fig_runlog_convergence_merged.{png,pdf,svg}
-"""
+"""Figure 13: candidate evaluations and generation summaries from formal run logs."""
 import csv
 import re
 from pathlib import Path
@@ -18,22 +11,17 @@ from matplotlib import font_manager
 from matplotlib.lines import Line2D
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]
-OUT = Path(__file__).resolve().parent
-OUT.mkdir(parents=True, exist_ok=True)
-
-for name in ("times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf"):
-    path = ROOT / "Times new Roman" / name
-    if path.exists():
-        font_manager.fontManager.addfont(str(path))
+from figure_common import DATA_DIR, output_dir, setup_font
+ROOT = DATA_DIR
+OUT = output_dir()
 
 RUNLOGS = [
     ("(a) LLaMA3-8B  layer-wise CMA-ES search",  "#5b3b95",
-     ROOT / "llama8b" / "逐层搜索" / "layer merge" / "run.log"),
+     ROOT / "llama8b" / "layer_search" / "layer_merge" / "run.log"),
     ("(b) LLaMA3-3B  layer-wise CMA-ES search",  "#2563a8",
-     ROOT / "llama3b" / "逐层搜索" / "layer merge" / "run.log"),
+     ROOT / "llama3b" / "layer_search" / "layer_merge" / "run.log"),
     ("(c) SmolLM2 (1.7B)  layer-wise CMA-ES search", "#0e7c66",
-     ROOT / "smollm2" / "compare" / "逐层" / "run.log"),
+     ROOT / "smollm2" / "compare" / "layer" / "run.log"),
 ]
 MEAN_COLOR = "#c2410c"      # warm orange-red for the per-generation mean
 SCATTER_COLOR = "#9aa3ad"
@@ -145,7 +133,8 @@ def draw(ax, title, color, rows):
 
 
 def main():
-    plt.rcParams.update({"font.family": "Times New Roman", "axes.linewidth": 0.9,
+    setup_font()
+    plt.rcParams.update({ "axes.linewidth": 0.9,
                          "savefig.dpi": 300})
     fig, axes = plt.subplots(3, 1, figsize=(11.0, 11.6),
                              gridspec_kw={"hspace": 0.45})
@@ -180,13 +169,13 @@ def main():
                  color=INK, y=0.995)
     fig.tight_layout(rect=(0, 0, 1, 0.955))
 
-    stem = OUT / "fig_runlog_convergence_merged"
+    stem = OUT / "figure13_runlog_convergence"
     for ext in ("png", "pdf", "svg"):
         fig.savefig(stem.with_suffix("." + ext), bbox_inches="tight",
                     pad_inches=0.07, facecolor="white")
     plt.close(fig)
 
-    with (OUT / "runlog_convergence_merged_data.csv").open(
+    with (OUT / "figure13_runlog_data.csv").open(
             "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=["Model", "Evaluation", "Generation",
                                           "Stage", "Candidate", "Score"])
